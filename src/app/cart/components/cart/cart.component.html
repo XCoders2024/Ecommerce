@@ -1,0 +1,60 @@
+<div class="cart">
+  <div class="container">
+    <div class="heading">
+      <h1>Shopping Cart</h1>
+      <div class="deleteAll">
+        <p>
+          You Have <span>{{ cartProducts.length }}</span> Item In Your Cart
+        </p>
+        <button class="deleteAllBtn" (click)="deleteAllFun()">
+          Clear Shopping Cart
+        </button>
+      </div>
+    </div>
+    <table>
+      <thead>
+        <tr>
+          <th></th>
+          <th>Name</th>
+          <th>Price</th>
+          <th></th>
+          <th>Quantity</th>
+          <th></th>
+          <th>Total</th>
+          <th>Delete</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of cartProducts; let i = index">
+          <td><img [src]="item.proImg" alt="" /></td>
+          <td>{{ item.proName }}</td>
+          <td>
+            <span>{{ item.proPrice }}</span> LE
+          </td>
+          <td><div class="add" (click)="plusItem(i)">+</div></td>
+          <td>
+            <input type="number" disabled [(ngModel)]="item.quantity" />
+          </td>
+
+          <td><div class="del" (click)="minItem(i)">-</div></td>
+          <td>{{ item.proPrice * item.quantity }}</td>
+          <td>
+            <button class="delBtn" (click)="deleteCurrentItem(item.proId)">
+              Delete
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="submited">
+      <p>
+        Total <span>{{ total }}</span>
+      </p>
+      <button (click)="addToCart()">Order Now</button>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+  <div class="dataSent" *ngIf="status">!Data Sent Successfuly</div>
+</div>

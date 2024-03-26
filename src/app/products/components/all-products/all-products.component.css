@@ -1,0 +1,25 @@
+.filter {
+  padding-top: 1rem;
+}
+
+.filter .container label {
+  width: 20%;
+}
+.filter .container input {
+  width: 300px;
+  padding: 12px;
+}
+/* ------------------- */
+.products {
+  padding-top: 1.5rem;
+}
+.products .container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1rem;
+}
+
+.mySpinner {
+  padding-top: 30px;
+  text-align: center;
+}

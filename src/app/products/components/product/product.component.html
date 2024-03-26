@@ -1,0 +1,31 @@
+<div class="box" [id]="data._id">
+  <div class="img" routerLink="/details/{{ data._id }}">
+    <img [src]="data.proImg" alt="" />
+  </div>
+  <div class="content">
+    <div class="head" routerLink="/details/{{ data._id }}">
+      <h2>{{ data.proName }}</h2>
+    </div>
+    <div class="text">
+      <p>{{ data.proDescription }}</p>
+      <div class="btns">
+        <button *ngIf="!addStatus" (click)="addStatus = true">Add</button>
+        <div class="numOfItem" *ngIf="addStatus">
+          <input
+            onkeydown="return false"
+            min="1"
+            type="number"
+            name=""
+            id=""
+            value="1"
+            style="width: 100px; padding: 6px; margin-right: 4px"
+            [(ngModel)]="amount"
+          />
+
+          <button (click)="addItemToCart($event)">Add</button>
+        </div>
+        <span>{{ data.proPrice }}</span>
+      </div>
+    </div>
+  </div>
+</div>

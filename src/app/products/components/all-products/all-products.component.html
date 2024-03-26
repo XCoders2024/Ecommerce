@@ -1,0 +1,28 @@
+<div class="filter">
+  <div class="container">
+    <app-select
+      [title]="'Category'"
+      [data]="allCategory"
+      (allData)="filterData($event)"
+    ></app-select>
+
+    <label for="">
+      Search
+      <input type="text" [(ngModel)]="byName" (input)="getProduct()" />
+    </label>
+  </div>
+</div>
+
+<div class="products">
+  <div class="container" *ngIf="!loading">
+    <div *ngFor="let item of allProducts">
+      <app-product
+        [data]="item"
+        (selectedItem)="addToCart($event)"
+      ></app-product>
+    </div>
+  </div>
+  <div class="mySpinner" *ngIf="loading">
+    <app-spinner></app-spinner>
+  </div>
+</div>
