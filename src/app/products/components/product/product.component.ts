@@ -7,6 +7,7 @@ import { RouterLink } from '@angular/router';
   selector: 'app-product',
   templateUrl: './product.component.html',
   styleUrl: './product.component.css',
+  template: `<app-product-details [data]="amount"></app-product-details>`
 })
 export class ProductComponent {
   @Input() data: any = {};

@@ -21,7 +21,7 @@ import { HttpClientModule } from '@angular/common/http';
     FormsModule,
     SharedModule,
     RouterModule,
-    HttpClientModule,
+    HttpClientModule
   ],
   exports: [AllProductsComponent, ProductDetailsComponent, ProductComponent],
 })

@@ -9,7 +9,7 @@ import { CategoryService } from '../../services/category.service';
 export class AllCategoryComponent {
   errorMsg: any;
   allCategory: any[] = [];
-  //--------------------------------------------------------------------------
+    //--------------------------------------------------------------------------
   constructor(private service: CategoryService) {}
 
   ngOnInit(): void {
@@ -27,4 +27,4 @@ getCategory() {
     });
 
 }
-}
+} 

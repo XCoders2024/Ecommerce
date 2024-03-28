@@ -1,28 +1,26 @@
 <div class="item" *ngIf="!loading">
   <div class="container">
     <div class="img">
-      <img [src]="myData.image" alt="s" />
+      <img [src]="myData.proImg" alt="s" />
     </div>
     <div class="details">
       <ul>
         <li>
-          Title: <span>{{ myData.title }}</span>
+          Title: <span>{{ myData.proName }}</span>
         </li>
         <li>
-          Category: <span>{{ myData.category }}</span>
+          Category: <span>{{ myData.proCategory }}</span>
         </li>
         <li>
-          Description: <span>{{ myData.description }}</span>
+          Description: <span>{{ myData.proDescription }}</span>
         </li>
         <li>
-          Rate: <span>{{ myData.rating.rate }}</span>
+          Price: <span>{{ myData.proPrice }} LE</span>
         </li>
         <li>
-          Count: <span>{{ myData.rating.count }}</span>
+          Count: <span>{{ data }}</span>
         </li>
-        <li>
-          Price: <span>{{ myData.price }}</span> LE
-        </li>
+
       </ul>
     </div>
   </div>
