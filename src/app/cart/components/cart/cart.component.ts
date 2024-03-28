@@ -36,22 +36,31 @@ export class CartComponent implements OnInit {
   }
 
   plusItem(i) {
-    this.cartProducts[i].quantity++;
-    window.localStorage.cartProduct = JSON.stringify(this.cartProducts);
-    this.getTotal();
+    if (i.quantity < 10) {
+      this.services.addOneItem(i).subscribe((data: any) => {
+        console.log(data, 'From Components');
+      });
+      this.getTotal();
+    }
   }
   minItem(i) {
-    this.cartProducts[i].quantity--;
-    window.localStorage.cartProduct = JSON.stringify(this.cartProducts);
-    this.getTotal();
+    if (i.quantity > 1) {
+      this.services.minusOneItem(i).subscribe((data: any) => {
+        console.log(data, 'From Components');
+      });
+      this.getTotal();
+    }
   }
   deleteAllFun() {
-    this.cartProducts = [];
-    window.localStorage.cartProduct = JSON.stringify(this.cartProducts);
+    this.services.deleteAllFromCart().subscribe((data: any) => {
+      if (!data) {
+        alert('Cart Is Empty');
+      }
+    });
+    this.getCartProduct();
     this.getTotal();
   }
   deleteCurrentItem(proId) {
-    console.log(proId);
     this.services.delItemFromCart(proId).subscribe((data: any) => {
       console.log(data);
     });

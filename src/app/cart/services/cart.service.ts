@@ -27,4 +27,40 @@ export class CartService {
       })
     );
   }
+
+  deleteAllFromCart() {
+    return this.http.delete(`${this.Url}api/v1/cart/clear`).pipe(
+      catchError((err) => {
+        return throwError(() => err.message || 'ServerError');
+      })
+    );
+  }
+  addOneItem(data: any) {
+    let myData = {
+      proId: data.proId,
+      proName: data.proName,
+      proDescription: data.proDescription,
+      proCategory: data.proCategory,
+      proPrice: data.proPrice,
+      proImg: data.proImg,
+      quantity: (parseInt(data.quantity) + 1).toString(),
+      userEmail: 'mustafa.abdo4941@gmail.com',
+    };
+    console.log(myData);
+    return this.http.put(`${this.Url}api/v1/cart/upd/${data.proId}`, myData);
+  }
+  minusOneItem(data: any) {
+    let myData = {
+      proId: data.proId,
+      proName: data.proName,
+      proDescription: data.proDescription,
+      proCategory: data.proCategory,
+      proPrice: data.proPrice,
+      proImg: data.proImg,
+      quantity: (parseInt(data.quantity) - 1).toString(),
+      userEmail: 'mustafa.abdo4941@gmail.com',
+    };
+    console.log(myData);
+    return this.http.put(`${this.Url}api/v1/cart/upd/${data.proId}`, myData);
+  }
 }

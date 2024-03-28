@@ -42,20 +42,15 @@ let addNewProToUserCart = async (req, res) => {
   });
   let cart;
   if (ifExist) {
-    let newPrice = parseInt(ifExist.quantity) + 1;
+    let newQuantity = (
+      parseInt(ifExist.quantity) + parseInt(req.body.quantity)
+    ).toString();
     cart = await Cart.updateOne(
       { proId: req.body.proId, userEmail: req.body.userEmail },
-      { $set: { quantity: newPrice.toString() } }
+      { $set: { quantity: newQuantity.toString() } }
     );
-    if (cart) {
-      res.send(newPrice);
-    } else {
-      return res
-        .status(404)
-        .send(
-          `User With Id: ${cookieUserEmail} or Product With Id: ${productIdParam} Not Found`
-        );
-    }
+
+    res.send(newQuantity);
   } else {
     cart = new Cart({
       proId: req.body.proId,
@@ -65,7 +60,7 @@ let addNewProToUserCart = async (req, res) => {
       proPrice: req.body.proPrice,
       proImg: req.body.proImg,
       userEmail: req.body.userEmail,
-      quantity: "1",
+      quantity: req.body.quantity,
     });
     // let cart = new Cart(req.body);
 
@@ -89,12 +84,11 @@ let addNewProToUserCart = async (req, res) => {
 let updateProInUserCart = async (req, res) => {
   // let cookieUserEmail = Buffer.from(req.cookies.id, "base64");
   // let productIdParam = req.params.proId;
-  let cookieUserEmail = JSON.parse(req.params.myObj).userEmail;
 
-  let productIdParam = JSON.parse(req.params.myObj).proId;
+  let productIdParam = req.params.id;
 
   let upCart = await Cart.findOneAndUpdate(
-    { userEmail: cookieUserEmail, proId: productIdParam },
+    { proId: productIdParam },
     req.body,
     {
       returnOriginal: false,

@@ -31,12 +31,12 @@
           <td>
             <span>{{ item.proPrice }}</span> LE
           </td>
-          <td><div class="add" (click)="plusItem(i)">+</div></td>
+          <td><div class="add" (click)="plusItem(item)">+</div></td>
           <td>
             <input type="number" disabled [(ngModel)]="item.quantity" />
           </td>
 
-          <td><div class="del" (click)="minItem(i)">-</div></td>
+          <td><div class="del" (click)="minItem(item)">-</div></td>
           <td>{{ item.proPrice * item.quantity }}</td>
           <td>
             <button class="delBtn" (click)="deleteCurrentItem(item.proId)">

@@ -107,10 +107,7 @@ export class AllProductsComponent implements OnInit {
   myDataInLocalStorage: any[];
 
   addToCart(event) {
-    this.services.addProducToCart(1).subscribe((data: any) => {
-      this.allCategory = data;
-      console.log(data);
-    });
+    this.services.addProducToCart(event).subscribe((data: any) => {});
   }
   // -----------------------------
   ngOnInit(): void {

@@ -19,6 +19,7 @@ export class ProductComponent {
       item: this.data,
       quantity: this.amount,
     });
-    console.log(this.data), (this.addStatus = false);
+
+    this.addStatus = false;
   }
 }
