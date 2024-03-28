@@ -24,7 +24,7 @@ export class ProductsService {
   }
 
   getProductsByCategory(key) {
-    return this.http.get(`${this.Url}api/v1/product/cate/${key}`).pipe(
+    return this.http.get(`${this.Url}api/v1/product/category/${key}`).pipe(
       catchError((err) => {
         return throwError(() => err.message || 'ServerError');
       })

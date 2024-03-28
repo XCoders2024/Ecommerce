@@ -1,5 +1,5 @@
 import { HttpClientModule } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ProductsService } from '../../services/products.service';
 
@@ -7,9 +7,13 @@ import { ProductsService } from '../../services/products.service';
   selector: 'app-product-details',
   templateUrl: './product-details.component.html',
   styleUrl: './product-details.component.css',
+  template: `
+  <p>{{ data }}</p>
+`
 })
 export class ProductDetailsComponent implements OnInit {
   id: any;
+  @Input() data: number;
   constructor(
     private currentId: ActivatedRoute,
     private http: ProductsService
@@ -19,6 +23,7 @@ export class ProductDetailsComponent implements OnInit {
   loading: boolean = false;
   ngOnInit(): void {
     this.getProduct();
+    console.log (this.data);
   }
   myData: any = {};
   getProduct() {

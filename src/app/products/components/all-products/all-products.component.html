@@ -1,28 +1,35 @@
-<div class="filter">
-  <div class="container">
+<div class="filter row mt-5">
+  <div class="col-md-6 col-sm-12">
     <app-select
       [title]="'Category'"
       [data]="allCategory"
       (allData)="filterData($event)"
     ></app-select>
-
-    <label for="">
-      Search
-      <input type="text" [(ngModel)]="byName" (input)="getProduct()" />
-    </label>
   </div>
+  <div class="col-md-6 col-sm-12">
+    <label for="">
+      <span class="me-2">Search:</span>
+      <input type="text" [(ngModel)]="byName" (input)="getProduct()" class="rounded-3 py-2 pe-5 ps-2"/>
+    </label>
+  </div> 
 </div>
 
 <div class="products">
-  <div class="container" *ngIf="!loading">
-    <div *ngFor="let item of allProducts">
+ 
+  <div  *ngIf="!loading">
+    <div class=" row g-3 align-items-stretch" >
+    <div class="card col-md-4 pt-3 border-0 align-self-stretch" *ngFor="let item of allProducts">
+      <div class="pt-3  card flex-fill ">
       <app-product
         [data]="item"
         (selectedItem)="addToCart($event)"
       ></app-product>
-    </div>
   </div>
   <div class="mySpinner" *ngIf="loading">
     <app-spinner></app-spinner>
   </div>
 </div>
+</div>
+</div>
+</div>
+
