@@ -15,13 +15,16 @@ require("./DB/index");
 
 /////////////////////////////////////////////////////////////////////////
 //to link front and back although running on different ports  Cross-Origin Resource Sharing (CORS)
-app.use(function(req, res, next) {
-  res.header('Access-Control-Allow-Origin', 'http://localhost:4200'); // Replace * with the specific domain of your frontend
-  res.header('Access-Control-Allow-Methods', 'GET, POST, PATCH, DELETE');                       //don't forget to add useremail to allow send data in the header
-  res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept ,useremail');
+app.use(function (req, res, next) {
+  res.header("Access-Control-Allow-Origin", "http://localhost:4200"); // Replace * with the specific domain of your frontend
+  res.header("Access-Control-Allow-Methods", "GET, POST, PATCH, DELETE"); //don't forget to add useremail to allow send data in the header
+  res.header(
+    "Access-Control-Allow-Headers",
+    "Origin, X-Requested-With, Content-Type, Accept ,useremail"
+  );
   next();
 });
-  
+
 //////////////////////////////////////////////////////////////////////////
 //middle ware functions
 app.use(express.static("public"));
@@ -41,7 +44,7 @@ app.use("/api/v1/cart", userAuth, cartRouter);
 app.use("/api/v1/category", userAuth, categoriesRouter);
 app.use("/api/v1/product", userAuth, productRouter);
 app.use("/api/v1/orders", userAuth, ordersRouter);
-app.use("/api/v1/payment",userAuth, paymentRouter);
+app.use("/api/v1/payment", userAuth, paymentRouter);
 const PORT = process.env.PORT || 3000;
 
 app.listen(PORT, () => {
