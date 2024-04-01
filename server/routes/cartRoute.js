@@ -12,9 +12,9 @@ app = express();
 cartRouter.get("/", cartController.getUserCart);
 // cartRouter.get("/add", cartController.addNewProToUserCart);
 cartRouter.post("/add", cartController.addNewProToUserCart);
-cartRouter.put("/upd/:myObj", cartController.updateProInUserCart);
+cartRouter.put("/upd/:id", cartController.updateProInUserCart);
 cartRouter.delete("/clear", cartController.deleteAllUserCart);
 cartRouter.get("/del/:myObj", cartController.deleteOneProductFromUserCart);
-cartRouter.delete("/del/:myObj", cartController.deleteOneProductFromUserCart);
+cartRouter.delete("/del/:id", cartController.deleteOneProductFromUserCart);
 
 module.exports = cartRouter;
