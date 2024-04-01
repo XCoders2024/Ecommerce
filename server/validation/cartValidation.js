@@ -11,13 +11,13 @@ const cartSchema = {
     proDescription: { type: "string", minLength: 5 },
     proCategory: {
       type: "string",
+
       minLength: 2,
       // enum: [],
     },
     proPrice: { type: "string", minLength: 1 },
     proImg: { type: "string" },
-    userEmail: { /*type: "object" */ type: "string" },
-    quantity: { /*type: "object" */ type: "string" },
+    userId: { /*type: "object" */ type: "string" },
   },
   required: [
     "proId",
@@ -26,9 +26,9 @@ const cartSchema = {
     "proCategory",
     "proPrice",
     "proImg",
-    "userEmail",
+    "userId",
   ],
-  maxProperties: 8,
+  maxProperties: 7,
   minProperties: 7,
 };
 const ajv = new Ajv();

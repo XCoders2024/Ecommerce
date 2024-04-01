@@ -15,10 +15,9 @@ const cartSchema = new mongoose.Schema(
       minlength: 2,
       // enum: [],
     },
-    proPrice: { type: String, required: true, min: 1 },
+    proPrice: { type: Number, required: true, min: 1 },
     proImg: { type: String, trim: true, required: true },
-    quantity: { type: String, trim: true, required: true },
-    userEmail: { /*type: Object*/ type: String, required: true },
+    userId: { /*type: Object*/ type: String, required: true },
   },
   { timestamps: true }
 );

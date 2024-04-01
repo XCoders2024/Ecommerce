@@ -9,86 +9,68 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.set("view engine", "ejs");
 const path = require("path");
-const { type } = require("os");
 app.use(express.static("public"));
 
 //Get the current user's shopping cart using _id
 
 let getUserCart = async (req, res) => {
-  // let cookieUserEmail = Buffer.from(req.cookies.id, "base64");
+  // let cookieUserId = Buffer.from(req.cookies.id, "base64");
 
-  let cookieUserEmail = "mustafa.abdo4941@gmail.com";
+  let cookieUserId = "2";
 
-  // let cart = await Cart().findById({ userId: cookieUserEmail });
+  // let cart = await Cart().findById({ userId: cookieUserId });
   let cart = await Cart.find({
-    userEmail: cookieUserEmail,
+    /*userId: cookieUserId  */
   });
-  //   let cookieUserEmail = req.body.userId;
-  //   let cart = await Cart().find({ userId: cookieUserEmail });
+  //   let cookieUserId = req.body.userId;
+  //   let cart = await Cart().find({ userId: cookieUserId });
   if (cart) {
-    res.send(cart);
-    // res.render("../views/cart/cart.ejs", { allCartPro: cart });
+    // res.send(cart);
+    res.render("../views/cart/cart.ejs", { allCartPro: cart });
   } else {
-    return res.status(404).send(`User With Id: ${cookieUserEmail} Not Found`);
+    return res.status(404).send(`User With Id: ${cookieUserId} Not Found`);
   }
 };
 // Add a product to the shopping cart
-let addNewProToUserCart = async (req, res) => {
+let addNewProToUserCart = (req, res) => {
   let valid = cartValidationRouts(req.body);
-  // let cookieUserEmail = Buffer.from(req.cookies.id, "base64");
-  let ifExist = await Cart.findOne({
-    proId: req.body.proId,
-    userEmail: req.body.userEmail,
-  });
-  let cart;
-  if (ifExist) {
-    let newQuantity = (
-      parseInt(ifExist.quantity) + parseInt(req.body.quantity)
-    ).toString();
-    cart = await Cart.updateOne(
-      { proId: req.body.proId, userEmail: req.body.userEmail },
-      { $set: { quantity: newQuantity.toString() } }
-    );
+  // let cookieUserId = Buffer.from(req.cookies.id, "base64");
 
-    res.send(newQuantity);
+  let cart = new Cart(req.body);
+  // let cart = new Cart({
+  //   proId: req.body.proId,
+  //   proName: req.body.proName,
+  //   proDescription: req.body.proDescription,
+  //   proCategory: req.body.proCategory,
+  //   proPrice: req.body.proPrice,
+  //   proImg: req.body.proImg,
+  //   // userId: cookieUserId,
+  //   userId: req.body.userId,
+  // });
+  if (valid) {
+    cart
+      .save()
+      .then(() => {
+        res.send(cart);
+        // res.redirect("/")
+        // res.sendStatus(200);
+      })
+      .catch((err) => {
+        res.status(400).send("Bad Request In Cart: " + err.errors);
+      });
   } else {
-    cart = new Cart({
-      proId: req.body.proId,
-      proName: req.body.proName,
-      proDescription: req.body.proDescription,
-      proCategory: req.body.proCategory,
-      proPrice: req.body.proPrice,
-      proImg: req.body.proImg,
-      userEmail: req.body.userEmail,
-      quantity: req.body.quantity,
-    });
-    // let cart = new Cart(req.body);
-
-    if (valid) {
-      cart
-        .save()
-        .then(() => {
-          res.send(cart);
-          // res.redirect("/")
-          // res.sendStatus(200);
-        })
-        .catch((err) => {
-          res.status(400).send("Bad Request In Cart: " + err.errors);
-        });
-    } else {
-      res.status(403).send("Data Validation Routs Not Valid");
-    }
+    res.status(403).send("Data Validation Routs Not Valid");
   }
 };
 //Update a product in the shopping cart.
 let updateProInUserCart = async (req, res) => {
-  // let cookieUserEmail = Buffer.from(req.cookies.id, "base64");
+  // let cookieUserId = Buffer.from(req.cookies.id, "base64");
   // let productIdParam = req.params.proId;
+  let cookieUserId = JSON.parse(req.params.myObj).userId;
 
-  let productIdParam = req.params.id;
-
+  let productIdParam = JSON.parse(req.params.myObj).proId;
   let upCart = await Cart.findOneAndUpdate(
-    { proId: productIdParam },
+    { userId: cookieUserId, proId: productIdParam },
     req.body,
     {
       returnOriginal: false,
@@ -100,55 +82,51 @@ let updateProInUserCart = async (req, res) => {
     return res
       .status(404)
       .send(
-        `User With Eamil: ${cookieUserEmail} or Product With Id: ${productIdParam} Not Found`
+        `User With Id: ${cookieUserId} or Product With Id: ${productIdParam} Not Found`
       );
   }
 };
 //Remove a product from the shopping cart.
 
 let deleteOneProductFromUserCart = async (req, res) => {
-  // let cookieUserEmail = Buffer.from(req.cookies.id, "base64");
-
+  // let cookieUserId = Buffer.from(req.cookies.id, "base64");
   // let productIdParam = req.params.proId;
-  // let cookieUserEmail = JSON.parse(req.params.myObj).userId;
+  // let cookieUserId = JSON.parse(req.params.myObj).userId;
 
   // let productIdParam = JSON.parse(req.params.myObj).proId;
 
   // let DelOneCart = await Cart.findOneAndDelete({
-  //   userId: cookieUserEmail,
+  //   userId: cookieUserId,
   //   proId: productIdParam,
   // });
-  let cookieUserEmail = "mustafa.abdo4941@gmail.com";
-
-  let productIdParam = req.params.id;
+  let productIdParam = req.params.myObj;
   let DelOneCart = await Cart.findOneAndDelete({
-    proId: productIdParam,
-    userEmail: cookieUserEmail,
+    _id: productIdParam,
   });
   if (DelOneCart) {
     // res.send("Product Deleted Successfuly");
-    res.status(200).send();
+    res.redirect("/api/v1/cart");
   } else {
     return res
       .status(404)
       .send(
-        `User With Id: ${cookieUserEmail} or Product With Id: ${productIdParam} Not Found`
+        `User With Id: ${cookieUserId} or Product With Id: ${productIdParam} Not Found`
       );
   }
 };
 //Clear the entire shopping cart.
 let deleteAllUserCart = async (req, res) => {
-  // let cookieUserEmail = Buffer.from(req.cookies.id, "base64");
-  let cookieuserEmail = "mustafa.abdo4941@gmail.com";
+  // let cookieUserId = Buffer.from(req.cookies.id, "base64");
+  let cookieUserId = "1";
 
-  let DelOneCart = await Cart.deleteMany({ userEmail: cookieuserEmail });
+  let DelOneCart = await Cart.deleteMany({ userId: cookieUserId });
   if (DelOneCart) {
     res.send("Deleted Successfuly");
   } else {
     return res
       .status(404)
       .send(
-        `User With Email: ${cookieuserEmail} or Product With Id: ${productIdParam} Not Found`
+        `User With Id: ${cookieUserId} or Product With Id: ${productIdParam} Not Found`
       );
   }
 };
