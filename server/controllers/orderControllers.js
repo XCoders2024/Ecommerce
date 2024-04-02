@@ -113,6 +113,21 @@ const addOrder = async (req, res, next) => {
     // res.sendStatus(200);
   });
 };
+const UpdateOrderState =async (req,res) => {
+  const id=req.params.id;
+  const newState = req.body.state;
+  try{
+    const order = await Order.findByIdAndUpdate(orderId, { state: newState }, { new: true });
+
+    if (!order) {
+      return res.status(404).json({ error: 'Order not found' });
+    }
+    return res.json({ message: 'Order state updated successfully', order });
+  }catch(err){
+    console.error(err);
+    return res.status(500).json({ error: 'Internal server error' });
+  }
+}
 
 module.exports = {
   getAllOrders,
