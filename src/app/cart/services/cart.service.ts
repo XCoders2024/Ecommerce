@@ -74,6 +74,7 @@ export class CartService {
       proImg: data.proImg,
       quantity: data.quantity.toString(),
       userEmail: data.userEmail,
+      orderStatus: false,
     };
     console.log(myData);
     return this.http.post(`${this.Url}api/v1/orders/add`, myData);

@@ -19,6 +19,7 @@ const orderSchema = new mongoose.Schema(
     proImg: { type: String, trim: true, required: true },
     quantity: { type: String, trim: true, required: true },
     userEmail: { /*type: Object*/ type: String, required: true },
+    orderStatus: { type: Boolean },
   },
   { timestamps: true }
 );
