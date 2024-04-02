@@ -22,6 +22,7 @@
           <th></th>
           <th>Total</th>
           <th>Delete</th>
+          <th>Buy</th>
         </tr>
       </thead>
       <tbody>
@@ -43,6 +44,11 @@
               Delete
             </button>
           </td>
+          <td>
+            <button class="delBtn" routerLink="/order">
+              <a (click)="addFromCartToOrder(item)" href="/order">buy</a>
+            </button>
+          </td>
         </tr>
       </tbody>
     </table>
@@ -50,7 +56,9 @@
       <p>
         Total <span>{{ total }}</span>
       </p>
-      <button><a href="/order">Order Now</a></button>
+      <!-- <button routerLink="/order">
+        <a (click)="addCartToOrder()">Order Now</a>
+      </button> -->
     </div>
   </div>
 </div>

@@ -10,21 +10,22 @@ import { UserRegisterComponent } from './user/components/user-register/user-regi
 import { UserProfileComponent } from './user/components/user-profile/user-profile.component';
 import { UserEditComponent } from './user/components/user-edit/user-edit.component';
 import { UserLogoutComponent } from './user/components/user-logout/user-logout.component';
+import { OrdersComponent } from './order/components/orders/orders.component';
 
 const routes: Routes = [
   { path: '', component: AllProductsComponent },
   { path: 'product', component: AllProductsComponent },
   { path: 'details/:id', component: ProductDetailsComponent },
   { path: 'cart', component: CartComponent },
-  { path: 'order', component: PaymentComponent },
+  { path: 'order', component: OrdersComponent },
   { path: 'redirect', redirectTo: 'product', pathMatch: 'full' },
   { path: 'Category', component: AllCategoryComponent },
   { path: '**', redirectTo: 'product', pathMatch: 'full' },
-  {path:'login',component:UserLoginComponent},
-  {path:'Register',component:UserRegisterComponent},
-  {path:'Profile',component:UserProfileComponent},
-  {path:'userEdit',component:UserEditComponent},
-  {path:'logout',component:UserLogoutComponent},
+  { path: 'login', component: UserLoginComponent },
+  { path: 'Register', component: UserRegisterComponent },
+  { path: 'Profile', component: UserProfileComponent },
+  { path: 'userEdit', component: UserEditComponent },
+  { path: 'logout', component: UserLogoutComponent },
 ];
 
 @NgModule({

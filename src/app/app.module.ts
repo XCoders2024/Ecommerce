@@ -10,6 +10,7 @@ import { ProductsModule } from './products/products.module';
 import { CartModule } from './cart/cart.module';
 import { CategoryModule } from './category/category.module';
 import { UserModule } from './user/user.module';
+import { OrderModule } from './order/order.module';
 
 @NgModule({
   declarations: [AppComponent],
@@ -22,7 +23,8 @@ import { UserModule } from './user/user.module';
     ProductsModule,
     CartModule,
     CategoryModule,
-     UserModule
+    UserModule,
+    OrderModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

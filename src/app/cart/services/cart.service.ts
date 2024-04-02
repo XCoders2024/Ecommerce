@@ -63,4 +63,19 @@ export class CartService {
     console.log(myData);
     return this.http.put(`${this.Url}api/v1/cart/upd/${data.proId}`, myData);
   }
+
+  addCartToIrder(data: any) {
+    let myData = {
+      proId: data.proId,
+      proName: data.proName,
+      proDescription: data.proDescription,
+      proCategory: data.proCategory,
+      proPrice: data.proPrice,
+      proImg: data.proImg,
+      quantity: data.quantity.toString(),
+      userEmail: data.userEmail,
+    };
+    console.log(myData);
+    return this.http.post(`${this.Url}api/v1/orders/add`, myData);
+  }
 }

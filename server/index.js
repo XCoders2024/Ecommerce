@@ -15,7 +15,6 @@ const { userAuth } = require("./middleware/userAuth");
 const { adminAuth } = require("./middleware/adminAuth");
 require("./DB/index");
 
-
 /////////////////////////////////////////////////////////////////////////
 //to link front and back although running on different ports  Cross-Origin Resource Sharing (CORS)
 app.use(function (req, res, next) {

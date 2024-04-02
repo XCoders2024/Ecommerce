@@ -1,0 +1,67 @@
+<div class="container mt-5">
+  <div class="row justify-content-center">
+    <div class="col-md-8">
+      <h1 class="text-center">Order Details</h1>
+      <div class="row align-items-center mb-4">
+        <div class="col-md-6">
+          <p>
+            You Have <span>{{ orderProducts.length }}</span> products In Your
+            order
+          </p>
+        </div>
+      </div>
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Img</th>
+            <th>Name</th>
+            <th>Price</th>
+
+            <th>Delete</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of orderProducts; let i = index">
+            <td><img [src]="item.proImg" alt="" style="max-width: 100px" /></td>
+            <td>{{ item.proName }}</td>
+            <td>
+              <span>{{ item.proPrice }}</span> LE
+            </td>
+            <td>
+              <button
+                class="btn btn-danger"
+                (click)="deleteCurrentItem(item.proId)"
+              >
+                Delete
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="row justify-content-end">
+        <div class="col-md-4">
+          <div class="card">
+            <div class="card-body">
+              <p class="card-text">
+                totalPrice <span>{{ total }}</span>
+              </p>
+              <button class="btn btn-success btn-block" routerLink="/payment">
+                Check Out
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="container mt-3">
+  <div class="row justify-content-center">
+    <div class="col-md-6">
+      <div class="alert alert-success" role="alert" *ngIf="status">
+        Data Sent Successfully!
+      </div>
+    </div>
+  </div>
+</div>

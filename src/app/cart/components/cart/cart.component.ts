@@ -60,6 +60,7 @@ export class CartComponent implements OnInit {
     this.getCartProduct();
     this.getTotal();
   }
+  status: boolean;
   deleteCurrentItem(proId) {
     this.services.delItemFromCart(proId).subscribe((data: any) => {
       console.log(data);
@@ -67,18 +68,12 @@ export class CartComponent implements OnInit {
     this.getCartProduct();
     this.getTotal();
   }
-  status: boolean = false;
-  addToCart() {
-    let products = this.cartProducts.map((item) => {
-      return { productsId: item.item.id, quantity: item.quantity };
+  addFromCartToOrder(item) {
+    this.services.addCartToIrder(item).subscribe((data: any) => {
+      console.log(data);
     });
-    let model = {
-      userId: 1,
-      data: new Date(),
-      products: products,
-    };
-
-    this.services.createNewCart(model).subscribe((data) => {});
-    this.status = true;
+    this.services.delItemFromCart(item.proId).subscribe((data: any) => {
+      console.log(data);
+    });
   }
 }

@@ -6,68 +6,118 @@ const app = express();
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
-const getAllOrders = async(req, res)=> {
-    const orders = await orderModel.find({}).populate(['productIds','user']);
-    res.status(200).send(orders);
-}
+const getAllOrders = async (req, res) => {
+  // let cookieUserEmail = Buffer.from(req.cookies.id, "base64");
+
+  let cookieUserEmail = "mustafa.abdo4941@gmail.com";
+
+  // let cart = await Cart().findById({ userId: cookieUserEmail });
+  let order = await orderModel.find({
+    userEmail: cookieUserEmail,
+  });
+  //   let cookieUserEmail = req.body.userId;
+  //   let cart = await Cart().find({ userId: cookieUserEmail });
+  if (order) {
+    res.send(order);
+    // res.render("../views/cart/cart.ejs", { allCartPro: cart });
+  } else {
+    return res.status(404).send(`User With Id: ${cookieUserEmail} Not Found`);
+  }
+};
 
 // const getOrderByUserEmail = async (req,res)=>{
 //     const {Email} = req.params;
 //     const orderByEmail = await orderModel.find({userEmail:Email});
-//     // console.log(orderByEmail ); 
+//     // console.log(orderByEmail );
 //     res.status(200).send(orderByEmail);
 // }
 
-const getOrderById = async(req, res) => {
-    const {id} = req.params;
-    try{
-        const orderById =await orderModel.findById(id).populate(['productIds','user']);
-        if (!orderById){
-            res.status(404).send("this order not found");
-            return;
-        }else {
+const getOrderById = async (req, res) => {
+  let cookieUserEmail = "mustafa.abdo4941@gmail.com";
 
-            res.status(200).send(orderById);
-        }
-    }
-    catch(error){
-        res.status(404).send(error.message)
-    }   
-}
-
-
-const deleteOrder = async (req, res, next) => {
-    try {
-        const { id } = req.params;
-        const order = await orderModel.findOne({_id:id})
-        console.log(order);
-        if(!order) {
-            res.status(404).send("this order not found")
-            return;
-        }
-        else {
-            await order.updateOne({_id:id},req.body)
-            const updatedOrder = await order.findOne({_id:id})
-            res.send(updatedOrder);
-        }
-    }
-    catch (error){
-        res.status(404).send(error.message)
-    }
-
-}
-
-const addOrder = async (req, res, next) => { 
-    const {productIds,user,totalPrice} = req.body; 
-    // console.log(req.body) 
-    var newOrder = await orderModel.create({productIds,user,totalPrice}); 
-    res.status(200).send("Success"); 
+  let productIdParam = req.params.id;
+  let findFromOrder = await orderModel.find({
+    proId: productIdParam,
+    userEmail: cookieUserEmail,
+  });
+  if (findFromOrder) {
+    // res.send("Product Deleted Successfuly");
+    res.status(200).send(findFromOrder);
+  } else {
+    return res
+      .status(404)
+      .send(
+        `User With Id: ${cookieUserEmail} or Product With Id: ${productIdParam} Not Found`
+      );
+  }
 };
 
-module.exports= {
-    getAllOrders,
-    // getOrderByUserEmail,
-    getOrderById,
-    deleteOrder,
-    addOrder
-}
+const deleteOrder = async (req, res, next) => {
+  let cookieUserEmail = "mustafa.abdo4941@gmail.com";
+
+  let productIdParam = req.params.id;
+  let DelOneOrder = await orderModel.findOneAndDelete({
+    proId: productIdParam,
+    userEmail: cookieUserEmail,
+  });
+  if (DelOneOrder) {
+    // res.send("Product Deleted Successfuly");
+    res.status(200).send();
+  } else {
+    return res
+      .status(404)
+      .send(
+        `User With Id: ${cookieUserEmail} or Product With Id: ${productIdParam} Not Found`
+      );
+  }
+};
+
+const addOrder = async (req, res, next) => {
+  // const {
+  //   proId,
+  //   proName,
+  //   proDescription,
+  //   proCategory,
+  //   proPrice,
+  //   proImg,
+  //   quantity,
+  //   userEmail,
+  // } = req.body;
+  // // console.log(req.body)
+  // var newOrder = await orderModel.create({
+  //   proId,
+  //   proName,
+  //   proDescription,
+  //   proCategory,
+  //   proPrice,
+  //   proImg,
+  //   quantity,
+  //   userEmail,
+  // });
+  // console.log("Data", req.body);
+  // res.status(200).send();
+
+  order = new orderModel({
+    proId: req.body.proId,
+    proName: req.body.proName,
+    proDescription: req.body.proDescription,
+    proCategory: req.body.proCategory,
+    proPrice: req.body.proPrice,
+    proImg: req.body.proImg,
+    userEmail: req.body.userEmail,
+    quantity: req.body.quantity,
+  });
+  order.save().then(() => {
+    res.send(order);
+    // res.redirect("/")
+    // res.sendStatus(200);
+  });
+};
+
+module.exports = {
+  getAllOrders,
+  // getOrderByUserEmail,
+  getOrderById,
+  deleteOrder,
+  addOrder,
+};
