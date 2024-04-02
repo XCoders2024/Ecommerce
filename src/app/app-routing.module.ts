@@ -20,12 +20,13 @@ const routes: Routes = [
   { path: 'order', component: OrdersComponent },
   { path: 'redirect', redirectTo: 'product', pathMatch: 'full' },
   { path: 'Category', component: AllCategoryComponent },
-  { path: '**', redirectTo: 'product', pathMatch: 'full' },
+
   { path: 'login', component: UserLoginComponent },
   { path: 'Register', component: UserRegisterComponent },
   { path: 'Profile', component: UserProfileComponent },
   { path: 'userEdit', component: UserEditComponent },
   { path: 'logout', component: UserLogoutComponent },
+  { path: '**', redirectTo: 'product', pathMatch: 'full' },
 ];
 
 @NgModule({

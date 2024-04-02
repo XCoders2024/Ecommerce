@@ -1,4 +1,12 @@
-<div class="container mt-5">
+<div
+  *ngIf="orderProducts.length == 0"
+  style="width: 50%; margin: 20px auto; text-align: center"
+>
+  <h4>Order Is Empty</h4>
+  <a href="/cart">Go To Cart</a>
+</div>
+
+<div class="container" style="width: 100%" *ngIf="orderProducts.length != 0">
   <div class="row justify-content-center">
     <div class="col-md-8">
       <h1 class="text-center">Order Details</h1>
@@ -10,13 +18,15 @@
           </p>
         </div>
       </div>
-      <table class="table">
+      <table class="table" style="width: 100%">
         <thead>
           <tr>
             <th>Img</th>
             <th>Name</th>
             <th>Price</th>
-
+            <th>Quantity</th>
+            <th>Date</th>
+            <th>Status</th>
             <th>Delete</th>
           </tr>
         </thead>
@@ -27,10 +37,23 @@
             <td>
               <span>{{ item.proPrice }}</span> LE
             </td>
-            <td>
+            <td>{{ item.quantity }}</td>
+            <td>{{ item.createdAt }}</td>
+            <td *ngIf="item.orderStatus">Allow</td>
+            <td *ngIf="!item.orderStatus">Bending</td>
+            <td *ngIf="!item.orderStatus">
               <button
                 class="btn btn-danger"
                 (click)="deleteCurrentItem(item.proId)"
+              >
+                Delete
+              </button>
+            </td>
+            <td *ngIf="item.orderStatus">
+              <button
+                class="btn btn-danger"
+                (click)="deleteCurrentItem(item.proId)"
+                disabled
               >
                 Delete
               </button>
