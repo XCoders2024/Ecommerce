@@ -16,7 +16,7 @@ export class PaymentComponent implements OnInit {
   constructor(
     private cartComp: CartComponent,
     private cartService: CartService,
-    private orderDervices: OrderService,
+    private orderServices: OrderService,
     private route: ActivatedRoute,
     private router: Router
   ) {
@@ -27,7 +27,7 @@ export class PaymentComponent implements OnInit {
         value: `${this.cartComp.getTotal()}`,
         onApprove: () => {
           alert('The transaction successful');
-          this.orderDervices
+          this.orderServices
             .updatePaymentOrder({ id: this.id, payment: 'true' })
             .subscribe((res) => {
               if (!res) {
@@ -48,7 +48,7 @@ export class PaymentComponent implements OnInit {
     });
   }
   payCash() {
-    this.orderDervices
+    this.orderServices
       .updatePaymentOrder({ id: this.id, payment: 'cash' })
       .subscribe((res) => {
         if (!res) {

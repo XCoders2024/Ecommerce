@@ -1,5 +1,9 @@
 const mongoose = require("mongoose");
-
+const OrderStatus = {
+  PENDING: 'pending',
+  ACCEPTED: 'accepted',
+  REJECTED: 'rejected'
+};
 const orderSchema = new mongoose.Schema(
   {
     proId: {
@@ -19,7 +23,7 @@ const orderSchema = new mongoose.Schema(
     proImg: { type: String, trim: true, required: true },
     quantity: { type: String, trim: true, required: true },
     userEmail: { /*type: Object*/ type: String, required: true },
-    orderStatus: { type: Boolean },
+    orderStatus: { type: String, enum: Object.values(OrderStatus), default: OrderStatus.PENDING },
   },
   { timestamps: true }
 );
