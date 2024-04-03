@@ -11,6 +11,7 @@ import { CartModule } from './cart/cart.module';
 import { CategoryModule } from './category/category.module';
 import { UserModule } from './user/user.module';
 import { OrderModule } from './order/order.module';
+import { FooterModule } from './footer/footer.module';
 
 @NgModule({
   declarations: [AppComponent],
@@ -25,6 +26,7 @@ import { OrderModule } from './order/order.module';
     CategoryModule,
     UserModule,
     OrderModule,
+    FooterModule
   ],
   providers: [],
   bootstrap: [AppComponent],
