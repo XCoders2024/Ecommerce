@@ -2,8 +2,11 @@
   *ngIf="cartProducts.length == 0"
   style="width: 50%; margin: 20px auto; text-align: center"
 >
+<div class="row align-items-center elimg">
+  <img class="img-fluid w-75" src="../../../../assets/img/empty.jpeg" alt="" />
+</div>
   <h4>Cart Is Empty</h4>
-  <a href="/product">Go To Products</a>
+  <a class="btn btn-primary" href="/product">Go To Products</a>
 </div>
 <div class="cart" *ngIf="cartProducts.length != 0">
   <div class="container">
