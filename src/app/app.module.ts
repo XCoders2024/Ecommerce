@@ -13,6 +13,7 @@ import { UserModule } from './user/user.module';
 import { OrderModule } from './order/order.module';
 import { FooterModule } from './footer/footer.module';
 import { AdminModule } from './admin/admin.module';
+import { CarouselComponent } from './carousel/carousel.component';
 
 @NgModule({
   declarations: [AppComponent],
