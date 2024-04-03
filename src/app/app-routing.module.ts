@@ -11,6 +11,7 @@ import { UserProfileComponent } from './user/components/user-profile/user-profil
 import { UserEditComponent } from './user/components/user-edit/user-edit.component';
 import { UserLogoutComponent } from './user/components/user-logout/user-logout.component';
 import { OrdersComponent } from './order/components/orders/orders.component';
+import { AdminModule } from './admin/admin.module';
 
 const routes: Routes = [
   { path: '', component: AllProductsComponent },
@@ -26,11 +27,15 @@ const routes: Routes = [
   { path: 'Profile', component: UserProfileComponent },
   { path: 'userEdit', component: UserEditComponent },
   { path: 'logout', component: UserLogoutComponent },
+  {
+    path: 'admin', // Prefix for admin path
+    loadChildren: () => import('./admin/admin.module').then(m => m.AdminModule) // Lazy load admin module
+  },
   { path: '**', redirectTo: 'product', pathMatch: 'full' },
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+imports: [RouterModule.forRoot(routes)/*,AdminModule*/],
   exports: [RouterModule],
 })
 export class AppRoutingModule {}

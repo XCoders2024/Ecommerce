@@ -50,10 +50,10 @@ app.use("/api/v1", userRouter);
 // app.use(adminAuth)
 app.use("/api/v1/admin", adminAuth, adminRouter);
 // app.use(userAuth)
-app.use("/api/v1/cart", userAuth, cartRouter);
-app.use("/api/v1/category", userAuth, categoriesRouter);
-app.use("/api/v1/product", userAuth, productRouter);
-app.use("/api/v1/orders", userAuth, ordersRouter);
+app.use("/api/v1/cart", cartRouter);
+app.use("/api/v1/category", categoriesRouter);
+app.use("/api/v1/product", productRouter);
+app.use("/api/v1/orders", ordersRouter);
 app.use("/api/v1/payment", paymentRouter);
 // mongoose
 //   .connect("mongodb://localhost:27017/ECommerce")

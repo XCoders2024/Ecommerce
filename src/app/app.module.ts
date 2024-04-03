@@ -12,6 +12,7 @@ import { CategoryModule } from './category/category.module';
 import { UserModule } from './user/user.module';
 import { OrderModule } from './order/order.module';
 import { FooterModule } from './footer/footer.module';
+import { AdminModule } from './admin/admin.module';
 
 @NgModule({
   declarations: [AppComponent],
@@ -26,7 +27,8 @@ import { FooterModule } from './footer/footer.module';
     CategoryModule,
     UserModule,
     OrderModule,
-    FooterModule
+    FooterModule,
+
   ],
   providers: [],
   bootstrap: [AppComponent],

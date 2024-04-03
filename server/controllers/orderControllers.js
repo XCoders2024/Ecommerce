@@ -118,7 +118,7 @@ const UpdateOrderState =async (req,res) => {
   const id=req.params.id;
   const newState = req.body.state;
   try{
-    const order = await Order.findByIdAndUpdate(orderId, { state: newState }, { new: true });
+    const order = await Order.findByIdAndUpdate(orderId, { orderStatus: newState }, { new: true });
 
     if (!order) {
       return res.status(404).json({ error: 'Order not found' });
@@ -126,7 +126,7 @@ const UpdateOrderState =async (req,res) => {
     return res.json({ message: 'Order state updated successfully', order });
   }catch(err){
     console.error(err);
-    return res.status(500).json({ error: 'Internal server error' });
+    return res.status(500).json({ error: 'Internal server error in the order controller' });
   }
 }
 
@@ -136,4 +136,5 @@ module.exports = {
   getOrderById,
   deleteOrder,
   addOrder,
+  UpdateOrderState
 };
