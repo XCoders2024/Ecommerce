@@ -23,13 +23,19 @@
               <a
                 class="nav-link"
                 aria-current="page"
-                routerLink="/product"
+                [routerLink]="isUserAdmin ? '/admin/':'/product'"
+                [routerLinkActiveOptions]="{ exact: true }"
                 routerLinkActive="active"
                 >Home</a
               >
             </li>
             <li class="nav-item">
+              <a class="nav-link" aria-current="page" [hidden]="!isUserAdmin" [routerLink]="isUserAdmin ? '/admin/products' : '/product'"
+                routerLinkActive="active">Products</a>
+            </li>
+            <li class="nav-item">
               <a
+                [hidden]="isUserAdmin"
                 class="nav-link"
                 aria-current="page"
                 routerLink="/Category"
@@ -40,6 +46,7 @@
 
             <li class="nav-item">
               <a
+                [hidden]="isUserAdmin"
                 class="nav-link"
                 aria-current="page"
                 routerLink="/cart"
@@ -51,7 +58,7 @@
               <a
                 class="nav-link"
                 aria-current="page"
-                routerLink="/order"
+                [routerLink]="isUserAdmin ? 'admin/orders':'/order'"
                 routerLinkActive="active"
                 >Orders</a
               >

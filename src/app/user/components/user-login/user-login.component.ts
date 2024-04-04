@@ -4,6 +4,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { IUser } from '../../models/iuser';
 import { ApiResponse } from '../../models/api-response';
 import { HandleNavBarService } from '../../services/handle-nav-bar.service';
+import { AuthService } from '../../../auth/auth.service';
 
 @Component({
   selector: 'app-user-login',
@@ -16,7 +17,7 @@ export class UserLoginComponent {
   @ViewChild('alertDiv') alertDiv?:ElementRef;
   @ViewChild('alertParagraph') alertParagraph?:ElementRef;
 
-  constructor(private httpClient:HttpClient,private handleNavBarService:HandleNavBarService){
+  constructor(private httpClient:HttpClient,private handleNavBarService:HandleNavBarService,private authService:AuthService){
     this.httpOption={
       headers:new HttpHeaders({
         'Content-Type':'application/json'
@@ -28,17 +29,17 @@ export class UserLoginComponent {
      {
        userEmail:new FormControl('',[Validators.required,Validators.minLength(3),Validators.maxLength(255),Validators.email]),
        userPassword:new FormControl('',[Validators.required,Validators.minLength(3),Validators.maxLength(1024)]),
-                 
+
      }
    );
 
 
-   
+
   }
 
 
- 
- 
+
+
   userEmail(){
    return this.userLoginForm.get('userEmail');
   }
@@ -48,12 +49,12 @@ export class UserLoginComponent {
    }
 
   Submit() {
-    let UserLogin:IUser = this.userLoginForm.value as IUser; 
+    let UserLogin:IUser = this.userLoginForm.value as IUser;
 
     //const userEmail = this.userLoginForm.get('userEmail')?.value;  //how to access the value of an input in the form
-  
 
-    //call api 
+
+    //call api
     this.httpClient.post<ApiResponse>('http://localhost:3000/api/v1/login', UserLogin)
     .subscribe(
       response => {
@@ -63,7 +64,8 @@ export class UserLoginComponent {
          if(response.token){
           sessionStorage.setItem("token", response.token);
           sessionStorage.setItem("userEmail", response.userEmail);
-          
+          sessionStorage.setItem("role", response.role);
+          this.authService.isAuthenticatedSubject.next(sessionStorage.getItem('role') === 'admin')
           this.handleNavBarService.isLoggedSubject.next(true);
          }
       },
@@ -73,7 +75,7 @@ export class UserLoginComponent {
         this.showAlert(error.message);
       }
     );
- 
+
 }
 
 showAlert(message: string) {

@@ -1,8 +1,8 @@
 export interface IProduct{
-  id:string;
+  _id:string;
   proName:string,
   proDescription: string,
   proCategory:string,
-  proPrice: number,
+  proPrice: string,
   proImg: string,
 }

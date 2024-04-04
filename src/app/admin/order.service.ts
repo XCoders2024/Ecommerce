@@ -11,16 +11,17 @@ import { OrderStatus } from './models/order-status.enum';
 export class OrderService {
 
   constructor(private http: HttpClient) {}
-  private url=environment.baseApi+"/api/v1/orders"
+  private url=environment.baseApi+"api/v1/admin/orders"
   getOrders(): Observable<IOrder[]> {
     return this.http.get<any[]>(this.url).pipe(
       map((orders: any[]) => {
         return orders.map(order => ({
-          userEmail: order.user.username,
+          _id:order._id,
+          userEmail: order.userEmail,
           date: new Date(order.createdAt),
-          totalPrice: order.totalPrice,
+          totalPrice: order.proPrice,
           productTitle: order.proName,
-          state: order.state
+          state: order.orderStatus
         }));
       })
     );
@@ -28,11 +29,11 @@ export class OrderService {
   updateOrderState(orderId: string, newState: OrderStatus): Observable<{ message: string, order: IOrder }> {
     const url = `${this.url}/updateStatus/${orderId}`;
     const body = { state: newState };
-
     return this.http.put<{ message: string, order: any }>(url, body).pipe(
       map(({ message, order }) => {
         // Transform the order object from backend model to frontend model
         const transformedOrder: IOrder = {
+          _id:order._id,
           userEmail: order.userEmail,
           date: order.createdAt,
           totalPrice: order.totalPrice,

@@ -10,8 +10,8 @@ import { ProductFormComponent } from './products/product-form/product-form.compo
 const routes:Routes=[
       {path:'',component:AdminDashboardComponent,},
       {path:'products',component:ProductsComponent,},
-      {path:'products/:id',component:ProductDetailsComponent},
       {path:'products/add',component:ProductFormComponent},
+      {path:'products/:id',component:ProductDetailsComponent},
       {path:'orders',component:OrdersComponent}
 ];
 

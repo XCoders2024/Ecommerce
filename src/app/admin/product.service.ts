@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { environment } from '../../enviroments/environment.development';
 import { HttpClient } from '@angular/common/http';
-import { BehaviorSubject, catchError, Observable, tap, throwError } from 'rxjs';
+import { BehaviorSubject, catchError, map, Observable, tap, throwError } from 'rxjs';
 import { IProduct } from './models/IProduct';
 
 
@@ -9,7 +9,7 @@ import { IProduct } from './models/IProduct';
   providedIn: 'root'
 })
 export class ProductService {
-  private url = environment.baseApi+'/api/v1/product';
+  private url = environment.baseApi+'api/v1/product';
   private productsSubject = new BehaviorSubject<IProduct[]>([]);
   products$: Observable<IProduct[]> = this.productsSubject.asObservable();
 
@@ -17,6 +17,7 @@ export class ProductService {
 
   getAllProductsService() {
     return this.httpClient.get<IProduct[]>(this.url).pipe(
+      tap(products=>console.log("fetched products",products)),
       tap(products => this.productsSubject.next(products)), // Update BehaviorSubject with fetched data
       catchError(err => {
         return throwError(() => `Error in admin\\products : ${err.message}`);
@@ -36,12 +37,18 @@ export class ProductService {
     );
   }
 
+  getProductById(productId: string): Observable<IProduct> {
+    return this.productsSubject.pipe(
+      // Find the product with the specified ID
+      map(products => products.find((product: IProduct) => product._id === productId))
+    );
+  }
   editProductService(id: string, data: IProduct) {
     const editUrl = `${this.url}/${id}`;
     return this.httpClient.patch<IProduct>(editUrl, data).pipe(
       tap(updatedProduct => {
         const updatedProducts = this.productsSubject.value.map(product =>
-          product.id === id ? updatedProduct : product
+          product._id === id ? updatedProduct : product
         );
         this.productsSubject.next(updatedProducts); // Update BehaviorSubject with edited product
       }),
@@ -55,7 +62,7 @@ export class ProductService {
     const deleteUrl = `${this.url}/${id}`;
     return this.httpClient.delete<void>(deleteUrl).pipe(
       tap(() => {
-        const updatedProducts = this.productsSubject.value.filter(product => product.id !== id);
+        const updatedProducts = this.productsSubject.value.filter(product => product._id !== id);
         this.productsSubject.next(updatedProducts); // Update BehaviorSubject by removing deleted product
       }),
       catchError(err => {

@@ -6,6 +6,7 @@ import { UserLoginComponent } from './components/user-login/user-login.component
 import { UserLogoutComponent } from './components/user-logout/user-logout.component';
 import { UserRegisterComponent } from './components/user-register/user-register.component';
 import { UserProfileComponent } from './components/user-profile/user-profile.component';
+import { RouterModule } from '@angular/router';
 
 
 
@@ -13,7 +14,8 @@ import { UserProfileComponent } from './components/user-profile/user-profile.com
   declarations: [UserEditComponent,UserLoginComponent,UserLogoutComponent,UserRegisterComponent,UserProfileComponent],
   imports: [
     CommonModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    RouterModule
   ]
 })
 export class UserModule { }

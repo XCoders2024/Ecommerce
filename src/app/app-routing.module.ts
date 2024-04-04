@@ -12,6 +12,8 @@ import { UserEditComponent } from './user/components/user-edit/user-edit.compone
 import { UserLogoutComponent } from './user/components/user-logout/user-logout.component';
 import { OrdersComponent } from './order/components/orders/orders.component';
 import { AdminModule } from './admin/admin.module';
+import { authGuard } from './auth/auth.guard';
+import { UnauthorizedComponent } from './auth/unauthorized/unauthorized.component';
 
 const routes: Routes = [
   { path: '', component: AllProductsComponent },
@@ -30,7 +32,9 @@ const routes: Routes = [
   {
     path: 'admin', // Prefix for admin path
     loadChildren: () => import('./admin/admin.module').then(m => m.AdminModule) // Lazy load admin module
+    ,canActivate:[authGuard]
   },
+  {path:'unauthorized',component:UnauthorizedComponent},
   { path: '**', redirectTo: 'product', pathMatch: 'full' },
 ];
 
