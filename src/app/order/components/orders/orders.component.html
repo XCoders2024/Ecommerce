@@ -42,22 +42,14 @@
             </td>
             <td>{{ item.quantity }}</td>
             <td>{{ item.createdAt }}</td>
-            <td *ngIf="item.orderStatus">Allow</td>
-            <td *ngIf="!item.orderStatus">Bending</td>
-            <td *ngIf="!item.orderStatus">
+            <td *ngIf="item.orderStatus=='rejected'" ><span class="btn btn-danger">rejected</span></td>
+            <td *ngIf="item.orderStatus=='accepted'" class="btn-success"><span class="btn btn-success ">Accepted</span></td>
+            <td *ngIf="item.orderStatus=='pending'" class="btn-warning"><span class="btn btn-warning">Pending</span></td>
+            <td>
               <button
                 class="btn btn-danger"
                 (click)="deleteCurrentItem(item.proId)"
-              >
-                Delete
-              </button>
-            </td>
-            <td *ngIf="item.orderStatus">
-              <button
-                class="btn btn-danger"
-                (click)="deleteCurrentItem(item.proId)"
-                disabled
-              >
+                [disabled]="item.orderStatus!='pending'">
                 Delete
               </button>
             </td>

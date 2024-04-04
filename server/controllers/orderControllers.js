@@ -54,7 +54,7 @@ const getOrderById = async (req, res) => {
 
 const deleteOrder = async (req, res, next) => {
   let cookieUserEmail = "mustafa.abdo4941@gmail.com";
-  oStatus = "Bending";
+  oStatus = "pending";
   let productIdParam = req.params.id;
   let DelOneOrder = await orderModel.findOneAndDelete({
     proId: productIdParam,
@@ -106,7 +106,7 @@ const addOrder = async (req, res, next) => {
     proImg: req.body.proImg,
     userEmail: req.body.userEmail,
     quantity: req.body.quantity,
-    orderStatus: false,
+    orderStatus: "pending",
   });
   order.save().then(() => {
     res.send(order);

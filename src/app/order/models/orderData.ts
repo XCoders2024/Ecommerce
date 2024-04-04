@@ -1,3 +1,5 @@
+import { OrderStatus } from "../../admin/models/order-status.enum";
+
 export interface IorderItems {
   quantity: number;
   name: string;
@@ -21,7 +23,7 @@ export interface IprofileOrder {
   isPayment: string;
   orderitems: any;
   shippingPrice: number;
-  status: string;
+  status: OrderStatus;
   taxPrice: number;
   totalPrice: number;
   updatedAt: string;
