@@ -44,7 +44,7 @@ const createNewUser = async (req, res) => {
         userName,
         userEmail,
         passwordHash
-        
+
       });
       res.send({ newUser: newUser, message: "successful registration" });
     }
@@ -94,13 +94,15 @@ const login = async (req, res) => {
         res.header({ jwt: token }).send({
           token: token,
           userEmail: userEmail,
-          message: "access granted,Welcome admin hamada",
+          message: `access granted,Welcome admin ${user.userName}`,
+          role:"admin"
         });
       else
         res.header({ jwt: token }).send({
           token: token,
           userEmail: userEmail,
           message: `Welcome user ${user.userName}`,
+          role:"user"
         });
     }
   } catch (LoginError) {

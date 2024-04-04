@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { HandleNavBarService } from '../../services/handle-nav-bar.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-user-logout',
@@ -8,11 +9,13 @@ import { HandleNavBarService } from '../../services/handle-nav-bar.service';
 })
 export class UserLogoutComponent {
 
-constructor(private handleNavBarService:HandleNavBarService) {
-  
+constructor(private handleNavBarService:HandleNavBarService,private router:Router) {
+
   sessionStorage.removeItem("token");
   sessionStorage.removeItem("userEmail");
+  sessionStorage.removeItem("role");
   this.handleNavBarService.isLoggedSubject.next(false);
+  router.navigate([""]);
 }
 
 

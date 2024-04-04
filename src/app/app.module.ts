@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { SharedModule } from './shared/shared.module';
@@ -13,10 +13,14 @@ import { UserModule } from './user/user.module';
 import { OrderModule } from './order/order.module';
 import { FooterModule } from './footer/footer.module';
 import { AdminModule } from './admin/admin.module';
+import { HTTP_INTERCEPTORS,  HttpClientModule } from '@angular/common/http';
+import { AuthInterceptor } from './auth/auth.interceptor';
+import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
+import { UnauthorizedComponent } from './auth/unauthorized/unauthorized.component';
 import { CarouselComponent } from './carousel/carousel.component';
 
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [AppComponent, UnauthorizedComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -29,9 +33,13 @@ import { CarouselComponent } from './carousel/carousel.component';
     UserModule,
     OrderModule,
     FooterModule,
-
+    HttpClientModule,
+    MatSnackBarModule
   ],
-  providers: [],
+  providers: [
+    {provide:HTTP_INTERCEPTORS,useClass:AuthInterceptor,multi:true},
+    provideAnimationsAsync()
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

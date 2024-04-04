@@ -6,5 +6,6 @@ export interface ApiResponse {
   newUser: any, // Adjust the type based on the actual structure of the newUser object
   message: string,
   userEmail:string,
-  user:IUser
+  user:IUser,
+  role:string
 }

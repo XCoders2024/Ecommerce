@@ -118,7 +118,7 @@ const UpdateOrderState =async (req,res) => {
   const id=req.params.id;
   const newState = req.body.state;
   try{
-    const order = await Order.findByIdAndUpdate(orderId, { orderStatus: newState }, { new: true });
+    const order = await orderModel.findByIdAndUpdate(id, { orderStatus: newState }, { new: true });
 
     if (!order) {
       return res.status(404).json({ error: 'Order not found' });
