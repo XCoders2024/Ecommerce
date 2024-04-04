@@ -2,10 +2,13 @@
   *ngIf="orderProducts.length == 0"
   style="width: 50%; margin: 20px auto; text-align: center"
 >
-  <h4>Order Is Empty</h4>
-  <a href="/cart">Go To Cart</a>
+<div class="row align-items-center elimg">
+  <img class="img-fluid w-75" src="../../../../assets/img/empty.jpeg" alt="" />
 </div>
+  <h4>Order Is Empty</h4>
+  <a class="btn btn-primary" href="/cart">Go To Cart</a>
 
+</div>
 <div class="container" style="width: 100%" *ngIf="orderProducts.length != 0">
   <div class="row justify-content-center">
     <div class="col-md-8">

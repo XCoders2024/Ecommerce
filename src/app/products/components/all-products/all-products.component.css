@@ -1,25 +1,36 @@
-/* .filter {
-  padding-top: 1rem;
+#img {
+  width: 100%;
+  height: 85vh;
+  overflow: hidden;
+  padding: 5px 0px;
+  margin: 0 5px;
 }
 
-.filter .container label {
-  width: 20%;
+#img .carousel-item {
+  width: 100%;
+  height: 100vh;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+
 }
-.filter .container input {
-  width: 300px;
-  padding: 12px;
-}
-/* ------------------- */
-/* .products {
-  padding-top: 1.5rem;
-}
-.products .container {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 1rem;
+@media only screen and (max-width: 992px) {
+  #img .carousel-content {
+    padding: 10px 0px;
+    margin: 0 10px;
+  }
 }
 
-.mySpinner {
-  padding-top: 30px;
-  text-align: center;
-}  */
+
+/* (small devices) */
+@media (min-width: 576px){
+
+  .products .row-cols-md-3 .col {
+    flex: 0 0 50%; 
+    max-width: 50%; 
+  }
+}
+
+
+
+

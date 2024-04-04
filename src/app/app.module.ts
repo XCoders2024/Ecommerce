@@ -17,6 +17,7 @@ import { HTTP_INTERCEPTORS,  HttpClientModule } from '@angular/common/http';
 import { AuthInterceptor } from './auth/auth.interceptor';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { UnauthorizedComponent } from './auth/unauthorized/unauthorized.component';
+import { CarouselComponent } from './carousel/carousel.component';
 
 @NgModule({
   declarations: [AppComponent, UnauthorizedComponent],

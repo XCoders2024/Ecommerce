@@ -8,12 +8,14 @@ import { FormsModule } from '@angular/forms';
 import { ProductComponent } from './components/product/product.component';
 import { RouterModule } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
+import { CarouselComponent } from '../carousel/carousel.component';
 
 @NgModule({
   declarations: [
     AllProductsComponent,
     ProductDetailsComponent,
     ProductComponent,
+    CarouselComponent
   ],
   imports: [
     CommonModule,
@@ -21,7 +23,8 @@ import { HttpClientModule } from '@angular/common/http';
     FormsModule,
     SharedModule,
     RouterModule,
-    HttpClientModule
+    HttpClientModule,
+  
   ],
   exports: [AllProductsComponent, ProductDetailsComponent, ProductComponent],
 })
