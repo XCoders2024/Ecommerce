@@ -1,0 +1,45 @@
+.parcur {
+    position: relative;
+
+}
+.overlay{
+position:absolute;
+top: 8%;
+left:0;
+width: 100%;
+
+
+background-color: rgba(100, 149, 237, 0.1); /* Semi-transparent soft blue */
+
+
+z-index: 200;
+overflow: hidden;
+}
+@media only screen and (max-width: 600px) {
+    .overlay {
+        height: 21%;
+    }
+  }
+
+  @media only screen and (min-width: 601px) and (max-width: 800px) {
+    .overlay {
+        height: 27%;
+    }
+  }
+  @media only screen and (min-width: 800px) and (max-width: 1100px) {
+    .overlay {
+        height: 37%;
+    }
+  }
+  @media only screen and (min-width: 1100px) and (max-width: 1200px) {
+    .overlay {
+        height: 46%;
+    }
+  }
+
+  @media only screen and (min-width: 1200px) {
+    .overlay {
+        height: 50%;
+    }
+  }
+
