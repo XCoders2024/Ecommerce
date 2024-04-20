@@ -59,22 +59,19 @@ export class UserEditComponent {
 fillForm(){
  this.httpOption.headers = this.httpOption.headers.set('useremail', sessionStorage.getItem("userEmail") as string);
 
- this.httpClient.get<ApiResponse>('http://localhost:3000/api/v1/profile',this.httpOption).pipe(
+ this.httpClient.get('http://localhost:3000/api/v1/profile',this.httpOption).pipe(
   //we must do that to make him understand that the response is ApiResponse not HttpEvent<ApiResponse>
- map((event: HttpEvent<ApiResponse>) => {
-    if (event instanceof HttpResponse) {
-      return event.body as ApiResponse;
-    }
-  })
-).subscribe(
-   response => {
-     console.log('Response:', response);
-     if(response.message){
-       //alert(response.message);
-       this.showAlert(response.message);
+ map((response: any) => response as ApiResponse)
+)
+.subscribe(
+   (apiResponse: ApiResponse) => {
+     console.log('Response:', apiResponse);
+     if(apiResponse.message){
+       //alert(apiResponse.message);
+       this.showAlert(apiResponse.message);
      }
-     if(response){
-       this.user=response.user;
+     if(apiResponse){
+       this.user=apiResponse.user;
 
        this.userEditForm.patchValue({         //can provide some properties
          userName: this.user?.userName,

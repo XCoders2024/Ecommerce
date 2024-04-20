@@ -17,7 +17,7 @@ import { map } from 'rxjs';
 export class UserProfileComponent {
   httpOption;
   user?: IUser;
-  userImg;
+ 
 
   constructor(private httpClient: HttpClient) {
     this.httpOption = {
@@ -32,26 +32,23 @@ export class UserProfileComponent {
       sessionStorage.getItem('userEmail') as string
     );
 
+
+
     this.httpClient
-      .get<ApiResponse>('http://localhost:3000/api/v1/profile', this.httpOption)
-      .pipe(
-        //we must do that to make him understand that the response is ApiResponse not HttpEvent<ApiResponse>
-        map((event: HttpEvent<ApiResponse>) => {
-          if (event instanceof HttpResponse) {
-            return event.body as ApiResponse;
-          }
-        })
-      )
-      .subscribe(
-        (response) => {
-          console.log('Response:', response);
-          if (response.message) {
-            alert(response.message);
-          }
-          if (response) {
-            this.user = response.user;
-          }
-        },
+  .get('http://localhost:3000/api/v1/profile', this.httpOption)
+  .pipe(
+    map((response: any) => response as ApiResponse)
+  )
+  .subscribe(
+    (apiResponse: ApiResponse) => {
+      console.log('Response:', apiResponse);
+      if (apiResponse.message) {
+        alert(apiResponse.message);
+      }
+      if (apiResponse) {
+        this.user = apiResponse.user;
+      }
+    },
         (error) => {
           console.error('Error:', error);
           alert(error);
