@@ -19,6 +19,8 @@ body {
 }
 
 .container {
+  margin-top: 10px;
+  margin-bottom: 10px;
   position: relative;
   width: 400px;
   height: 650px;
@@ -26,7 +28,7 @@ body {
   padding: 40px;
   box-sizing: border-box;
   background: #ecf0f3;
-  box-shadow: 14px 14px 20px #cbced1, -14px -14px 20px white;
+  /* box-shadow: 14px 14px 20px #cbced1, -14px -14px 20px white; */
 }
 
 .brand-logo {
@@ -150,7 +152,7 @@ span{
   background-color: #ecf0f3 !important;
   margin: auto;
   z-index: 3;
-  margin-left: 510px;
+  margin-left: 380px;
   display: none;
 }
 /*//////////////////////////////////alert//////////////////////////////////////// */
