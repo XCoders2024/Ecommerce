@@ -73,29 +73,6 @@ const deleteOrder = async (req, res, next) => {
 };
 
 const addOrder = async (req, res, next) => {
-  // const {
-  //   proId,
-  //   proName,
-  //   proDescription,
-  //   proCategory,
-  //   proPrice,
-  //   proImg,
-  //   quantity,
-  //   userEmail,
-  // } = req.body;
-  // // console.log(req.body)
-  // var newOrder = await orderModel.create({
-  //   proId,
-  //   proName,
-  //   proDescription,
-  //   proCategory,
-  //   proPrice,
-  //   proImg,
-  //   quantity,
-  //   userEmail,
-  // });
-  // console.log("Data", req.body);
-  // res.status(200).send();
 
   order = new orderModel({
     proId: req.body.proId,
