@@ -4,7 +4,7 @@ import { AllProductsComponent } from './products/components/all-products/all-pro
 import { CartComponent } from './cart/components/cart/cart.component';
 import { ProductDetailsComponent } from './products/components/product-details/product-details.component';
 import { AllCategoryComponent } from './category/components/all-category/all-category.component';
-import { PaymentComponent } from './order/components/payment/payment.component';
+import { PaymentComponent } from './payment/components/payment/payment.component';
 import { UserLoginComponent } from './user/components/user-login/user-login.component';
 import { UserRegisterComponent } from './user/components/user-register/user-register.component';
 import { UserProfileComponent } from './user/components/user-profile/user-profile.component';
@@ -29,6 +29,7 @@ const routes: Routes = [
   { path: 'Profile', component: UserProfileComponent },
   { path: 'userEdit', component: UserEditComponent },
   { path: 'logout', component: UserLogoutComponent },
+  { path: 'payment', component: PaymentComponent },
   {
     path: 'admin', // Prefix for admin path
     loadChildren: () => import('./admin/admin.module').then(m => m.AdminModule) // Lazy load admin module

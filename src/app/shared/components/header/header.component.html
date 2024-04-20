@@ -63,6 +63,16 @@
                 >Orders</a
               >
             </li>
+            <li class="nav-item">
+              <a
+                [hidden]="isUserAdmin"
+                class="nav-link"
+                aria-current="page"
+                routerLink="/payment"
+                routerLinkActive="active"
+                >payment</a
+              >
+            </li>
           </ul>
         </div>
         <div class="me-auto  col-md-6  col-sm-12">
