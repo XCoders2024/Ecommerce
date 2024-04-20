@@ -3,7 +3,7 @@
 }
 .cart .container {
   padding: 1rem;
-  border: 1px solid black;
+  /* border: 1px solid black; */
   border-radius: 12px;
 }
 .cart .container .heading {
@@ -32,13 +32,13 @@ input {
 .del {
   width: 25px;
   height: 25px;
-  background-color: green;
+  /* background-color: green; */
   font-weight: bold;
   color: white;
   cursor: pointer;
 }
 .del {
-  background-color: rgb(173, 0, 0);
+  /* background-color: rgb(173, 0, 0); */
 }
 .cart .container .submited {
   display: flex;
@@ -68,9 +68,9 @@ img {
 .deleteAllBtn {
   padding: 12px;
   cursor: pointer;
-  background-color: red;
+  /* background-color: red; */
   color: white;
-  font-weight: bold;
+  /* font-weight: bold; */
 }
 .dataSent {
   padding: 1rem;
@@ -80,4 +80,8 @@ img {
   color: white;
   font-weight: bold;
   margin-bottom: 1rem;
+}
+a{
+  text-decoration: none;
+  color: #fff;
 }

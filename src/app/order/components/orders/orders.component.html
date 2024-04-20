@@ -9,7 +9,7 @@
   <a class="btn btn-primary" href="/cart">Go To Cart</a>
 
 </div>
-<div class="container" style="width: 100%" *ngIf="orderProducts.length != 0">
+<div class="container mt-3" style="width: 100%" *ngIf="orderProducts.length != 0">
   <div class="row justify-content-center">
     <div class="col-md-8">
       <h1 class="text-center">Order Details</h1>
@@ -43,8 +43,8 @@
             <td>{{ item.quantity }}</td>
             <td>{{ item.createdAt }}</td>
             <td *ngIf="item.orderStatus=='rejected'" ><span class="btn btn-danger">rejected</span></td>
-            <td *ngIf="item.orderStatus=='accepted'" class="btn-success"><span class="btn btn-success ">Accepted</span></td>
-            <td *ngIf="item.orderStatus=='pending'" class="btn-warning"><span class="btn btn-warning">Pending</span></td>
+            <td *ngIf="item.orderStatus=='accepted'" class="btn-success"><span class="btn btn-success text-white">Accepted</span></td>
+            <td *ngIf="item.orderStatus=='pending'" class="btn-warning"><span class="btn btn-warning text-white">Pending</span></td>
             <td>
               <button
                 class="btn btn-danger"
@@ -56,9 +56,9 @@
           </tr>
         </tbody>
       </table>
-      <div class="row justify-content-end">
+      <div class="row justify-content-start">
         <div class="col-md-4">
-          <div class="card">
+          <div class="card border-0">
             <div class="card-body">
               <p class="card-text">
                 totalPrice <span>{{ total }}</span>
