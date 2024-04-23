@@ -11,4 +11,7 @@ export class AuthService {
   static isAdmin(): boolean {
     return sessionStorage.getItem('role') === 'admin';
   }
+  setAuthenticationStatus(isAuthenticated: boolean): void {
+    this.isAuthenticatedSubject.next(isAuthenticated);
+  }
 }

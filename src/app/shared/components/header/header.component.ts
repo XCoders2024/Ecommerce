@@ -10,7 +10,7 @@ import { AuthService } from '../../../auth/auth.service';
 export class HeaderComponent implements OnInit,DoCheck {
 
   isUserLogged:boolean=false;
-  isUserAdmin: boolean=AuthService.isAdmin();
+  isUserAdmin: boolean=false;
 
 
   constructor(private handleNavBarService:HandleNavBarService,private authService:AuthService) {
